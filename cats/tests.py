@@ -13,13 +13,14 @@ class CatsCRUDTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertIn('/accounts/login/', response.url)
 
-    def test_authenticated_cat_list_and_meta_tag(self):
+    def test_authenticated_cat_list_and_meta_tags(self):
         client = Client()
         client.login(username='testuser', password='password123')
         response = client.get('/cats/')
         self.assertEqual(response.status_code, 200)
         content = response.content.decode('utf-8')
-        self.assertIn('<meta name="dj4e-code" content="53a9b4c9e6f79b30153c60fc0463863b">', content)
+        self.assertIn('<meta name="dj4e" content="53a9b4c9e6f79b30153c60fc0463863b">', content)
+        self.assertIn('<meta name="dj4e-code" content="53a9b4c9">', content)
 
     def test_cat_crud_lifecycle(self):
         client = Client()

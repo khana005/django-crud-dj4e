@@ -13,13 +13,14 @@ class AutosCRUDTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertIn('/accounts/login/', response.url)
 
-    def test_authenticated_auto_list_and_meta_tag(self):
+    def test_authenticated_auto_list_and_meta_tags(self):
         client = Client()
         client.login(username='dj4e_user', password='Meow_3a9b4c_42')
         response = client.get('/autos/')
         self.assertEqual(response.status_code, 200)
         content = response.content.decode('utf-8')
-        self.assertIn('<meta name="dj4e-code" content="53a9b4c9e6f79b30153c60fc0463863b">', content)
+        self.assertIn('<meta name="dj4e" content="53a9b4c9e6f79b30153c60fc0463863b">', content)
+        self.assertIn('<meta name="dj4e-code" content="53a9b4c9">', content)
 
     def test_make_delete_confirmation_button(self):
         client = Client()
