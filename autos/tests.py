@@ -19,7 +19,15 @@ class AutosCRUDTests(TestCase):
         response = client.get('/autos/')
         self.assertEqual(response.status_code, 200)
         content = response.content.decode('utf-8')
-        self.assertIn('<meta name="dj4e" content="53a9b4c9e6f79b30153c60fc0463863b">', content)
+        self.assertIn('<meta name="dj4e-code" content="53a9b4c9e6f79b30153c60fc0463863b">', content)
+
+    def test_make_delete_confirmation_button(self):
+        client = Client()
+        client.login(username='dj4e_user', password='Meow_3a9b4c_42')
+        response = client.get(f'/autos/lookup/{self.make.id}/delete/')
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode('utf-8')
+        self.assertIn('Yes, delete.', content)
 
     def test_auto_crud_lifecycle(self):
         client = Client()
@@ -47,7 +55,12 @@ class AutosCRUDTests(TestCase):
         auto.refresh_from_db()
         self.assertEqual(auto.nickname, 'Speedy Turbo')
 
-        # Delete Auto
+        # Delete Auto GET page test
+        del_get_resp = client.get(f'/autos/main/{auto.id}/delete/')
+        self.assertEqual(del_get_resp.status_code, 200)
+        self.assertIn('Yes, delete.', del_get_resp.content.decode('utf-8'))
+
+        # Delete Auto POST submit
         delete_resp = client.post(f'/autos/main/{auto.id}/delete/')
         self.assertEqual(delete_resp.status_code, 302)
         self.assertFalse(Auto.objects.filter(id=auto.id).exists())

@@ -19,7 +19,7 @@ class CatsCRUDTests(TestCase):
         response = client.get('/cats/')
         self.assertEqual(response.status_code, 200)
         content = response.content.decode('utf-8')
-        self.assertIn('<meta name="dj4e" content="53a9b4c9e6f79b30153c60fc0463863b">', content)
+        self.assertIn('<meta name="dj4e-code" content="53a9b4c9e6f79b30153c60fc0463863b">', content)
 
     def test_cat_crud_lifecycle(self):
         client = Client()
