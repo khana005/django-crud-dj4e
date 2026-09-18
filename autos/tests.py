@@ -20,7 +20,7 @@ class AutosCRUDTests(TestCase):
         self.assertEqual(response.status_code, 200)
         content = response.content.decode('utf-8')
         self.assertIn('<meta name="dj4e" content="53a9b4c9e6f79b30153c60fc0463863b">', content)
-        self.assertIn('<meta name="dj4e-code" content="53a9b4c9e6f79b30153c60fc0463863b">', content)
+        self.assertNotIn('dj4e-code', content)
         self.assertNotIn('42-42', content)
 
     def test_make_delete_confirmation_button(self):
