@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main',
     'hello',
     'polls',
+    'cats',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +69,9 @@ TEMPLATES = [
         },
     },
 ]
+
+LOGIN_REDIRECT_URL = '/cats/'
+LOGOUT_REDIRECT_URL = '/cats/'
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 

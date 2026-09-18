@@ -1,0 +1,13 @@
+{% extends "base_bootstrap.html" %}
+
+{% block content %}
+<h1>Cat Form</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit" class="btn btn-primary mt-2">
+    <a href="{% url 'cats:all' %}" class="btn btn-secondary mt-2">Cancel</a>
+</form>
+{% endblock %}
