@@ -1,0 +1,24 @@
+{% extends "base_bootstrap.html" %}
+
+{% block content %}
+<h1>Automobiles</h1>
+<p>
+    <a href="{% url 'autos:auto_create' %}">Add an auto</a> |
+    <a href="{% url 'autos:make_list' %}">View makes ({{ make_count }})</a> |
+    <a href="{% url 'autos:make_create' %}">Add a make</a>
+</p>
+
+{% if auto_list %}
+<ul>
+    {% for auto in auto_list %}
+    <li>
+        <strong>{{ auto.nickname }}</strong> ({{ auto.make }}, {{ auto.mileage }} miles) - {{ auto.comments }}
+        (<a href="{% url 'autos:auto_update' auto.id %}">Update</a> |
+        <a href="{% url 'autos:auto_delete' auto.id %}">Delete</a>)
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>There are no autos in the library.</p>
+{% endif %}
+{% endblock %}

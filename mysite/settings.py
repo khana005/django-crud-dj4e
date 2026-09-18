@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'hello',
     'polls',
     'cats',
+    'autos',
 ]
 
 MIDDLEWARE = [
@@ -70,8 +71,8 @@ TEMPLATES = [
     },
 ]
 
-LOGIN_REDIRECT_URL = '/cats/'
-LOGOUT_REDIRECT_URL = '/cats/'
+LOGIN_REDIRECT_URL = '/autos/'
+LOGOUT_REDIRECT_URL = '/autos/'
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
